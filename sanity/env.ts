@@ -14,6 +14,15 @@ export const projectId = assertValue(
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
+    console.error(`❌ ${errorMessage}`);
+    console.log('📝 Please check your .env.local file and follow the setup guide in ENVIRONMENT_SETUP.md');
+    
+    // In development, provide helpful guidance instead of crashing
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔧 Using placeholder values for development. Replace with actual values to access Sanity Studio.');
+      return (v as any) || 'placeholder-value';
+    }
+    
     throw new Error(errorMessage);
   }
 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, BookOpen } from "lucide-react";
 import EnrollButton from "@/components/EnrollButton";
+import { EnrollmentInquiryForm } from "@/components/EnrollmentInquiryForm";
 import getCourseBySlug from "@/sanity/lib/courses/getCourseBySlug";
 import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
 import { auth } from "@clerk/nextjs/server";
@@ -69,9 +70,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
               </p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 md:min-w-[300px]">
-              <div className="text-3xl font-bold text-white mb-4">
-                {course.price === 0 ? "Free" : `$${course.price}`}
+              <div className="text-2xl font-bold text-white mb-2">
+                Contact for Enrollment
               </div>
+              <p className="text-white/80 text-sm mb-4">
+                Speak with our team about enrollment options and pricing
+              </p>
               <EnrollButton courseId={course._id} isEnrolled={isEnrolled} />
             </div>
           </div>
@@ -86,7 +90,14 @@ export default async function CoursePage({ params }: CoursePageProps) {
             <div className="bg-card rounded-lg p-6 mb-8 border border-border">
               <h2 className="text-2xl font-bold mb-4">Course Content</h2>
               <div className="space-y-4">
-                {course.modules?.map((module, index) => (
+                {course.modules?.map((module: {
+                  _id: string;
+                  title?: string;
+                  lessons?: Array<{
+                    _id: string;
+                    title?: string;
+                  }> | null;
+                }, index: number) => (
                   <div
                     key={module._id}
                     className="border border-border rounded-lg"
@@ -97,7 +108,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
                       </h3>
                     </div>
                     <div className="divide-y divide-border">
-                      {module.lessons?.map((lesson, lessonIndex) => (
+                      {module.lessons?.map((lesson: {
+                        _id: string;
+                        title?: string;
+                      }, lessonIndex: number) => (
                         <div
                           key={lesson._id}
                           className="p-4 hover:bg-muted/50 transition-colors"
@@ -123,7 +137,9 @@ export default async function CoursePage({ params }: CoursePageProps) {
           </div>
 
           {/* Sidebar */}
-          <div>
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Instructor Info */}
             <div className="bg-card rounded-lg p-6 sticky top-4 border border-border">
               <h2 className="text-xl font-bold mb-4">Instructor</h2>
               {course.instructor && (
@@ -156,6 +172,14 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 </div>
               )}
             </div>
+
+            {/* Enrollment Inquiry Form */}
+            {!isEnrolled && (
+              <EnrollmentInquiryForm 
+                courseTitle={course.title || ""} 
+                courseId={course._id} 
+              />
+            )}
           </div>
         </div>
       </div>

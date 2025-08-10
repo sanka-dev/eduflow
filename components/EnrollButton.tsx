@@ -1,11 +1,8 @@
 "use client";
 
-import { createStripeCheckout } from "@/actions/createStripeCheckout";
 import { useUser } from "@clerk/nextjs";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Mail, Phone, MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
 
 function EnrollButton({
   courseId,
@@ -15,28 +12,9 @@ function EnrollButton({
   isEnrolled: boolean;
 }) {
   const { user, isLoaded: isUserLoaded } = useUser();
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-
-  const handleEnroll = async (courseId: string) => {
-    startTransition(async () => {
-      try {
-        const userId = user?.id;
-        if (!userId) return;
-
-        const { url } = await createStripeCheckout(courseId, userId);
-        if (url) {
-          router.push(url);
-        }
-      } catch (error) {
-        console.error("Error in handleEnroll:", error);
-        throw new Error("Failed to create checkout session");
-      }
-    });
-  };
 
   // Show loading state while checking user is loading
-  if (!isUserLoaded || isPending) {
+  if (!isUserLoaded) {
     return (
       <div className="w-full h-12 rounded-lg bg-gray-100 flex items-center justify-center">
         <div className="w-5 h-5 border-2 border-gray-400 border-t-gray-600 rounded-full animate-spin" />
@@ -58,34 +36,43 @@ function EnrollButton({
     );
   }
 
-  // Show enroll button only when we're sure user is not enrolled
+  // Show contact admin message for enrollment
   return (
-    <button
-      className={`w-full rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-in-out relative h-12
-        ${
-          isPending || !user?.id
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed hover:scale-100"
-            : "bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10"
-        }
-      `}
-      disabled={!user?.id || isPending}
-      onClick={() => handleEnroll(courseId)}
-    >
-      {!user?.id ? (
-        <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
-          Sign in to Enroll
-        </span>
-      ) : (
-        <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
-          Enroll Now
-        </span>
-      )}
-      {isPending && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-5 h-5 border-2 border-gray-400 border-t-gray-600 rounded-full animate-spin" />
+    <div className="w-full space-y-4">
+      <div className="w-full rounded-lg px-6 py-3 font-medium bg-gradient-to-r from-blue-500 to-indigo-500 text-white h-12 flex items-center justify-center gap-2">
+        <Mail className="w-5 h-5" />
+        <span>Contact for Enrollment</span>
+      </div>
+      
+      <div className="bg-gray-50 rounded-lg p-4 space-y-3 text-sm">
+        <p className="font-medium text-gray-900">Ready to enroll? Contact us:</p>
+        <div className="space-y-2 text-gray-700">
+          <div className="flex items-center gap-2">
+            <Mail className="w-4 h-4 text-blue-500" />
+            <a href="mailto:enrollment@yourschool.com" className="hover:text-blue-600 transition-colors">
+              enrollment@yourschool.com
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <Phone className="w-4 h-4 text-green-500" />
+            <a href="tel:+1234567890" className="hover:text-green-600 transition-colors">
+              (123) 456-7890
+            </a>
+          </div>
+          <div className="flex items-center gap-2">
+            <MessageCircle className="w-4 h-4 text-purple-500" />
+            <Link href="/contact" className="hover:text-purple-600 transition-colors">
+              Send inquiry form
+            </Link>
+          </div>
         </div>
-      )}
-    </button>
+        {user?.id && (
+          <p className="text-xs text-gray-600 mt-2">
+            Your account: {user.emailAddresses[0]?.emailAddress}
+          </p>
+        )}
+      </div>
+    </div>
   );
 }
 

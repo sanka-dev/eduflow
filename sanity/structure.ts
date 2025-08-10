@@ -125,6 +125,18 @@ export const structure = (S: StructureBuilder) =>
                         ])
                     )
                 ),
+
+              // Direct Enrollments Management
+              S.listItem()
+                .title("Enrollments")
+                .schemaType("enrollment")
+                .child(
+                  S.documentTypeList("enrollment")
+                    .title("All Enrollments")
+                    .defaultOrdering([
+                      { field: "enrolledAt", direction: "desc" },
+                    ])
+                ),
             ])
         ),
 

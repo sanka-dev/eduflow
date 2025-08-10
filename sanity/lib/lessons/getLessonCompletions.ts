@@ -28,10 +28,10 @@ export async function getLessonCompletions(
   const { course, completedLessons } = result.data;
 
   // Calculate module progress
-  const moduleProgress = course?.modules?.map((module) => {
+  const moduleProgress = course?.modules?.map((module: any) => {
     const totalLessons = module.lessons?.length || 0;
     const completedInModule = completedLessons.filter(
-      (completion) => completion.module?._id === module._id
+      (completion: any) => completion.module?._id === module._id
     ).length;
 
     return {
@@ -46,7 +46,7 @@ export async function getLessonCompletions(
   // Calculate overall course progress
   const totalLessons =
     course?.modules?.reduce(
-      (acc, module) => acc + (module?.lessons?.length || 0),
+      (acc: number, module: any) => acc + (module?.lessons?.length || 0),
       0
     ) || 0;
 

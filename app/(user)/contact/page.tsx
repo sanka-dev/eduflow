@@ -23,7 +23,7 @@ export default function ContactPage() {
                     <Mail className="w-6 h-6 text-blue-500 mt-1" />
                     <div>
                       <h3 className="font-medium">Email</h3>
-                      <p className="text-muted-foreground">enrollment@yourschool.com</p>
+                      <p className="text-muted-foreground">enrollment@eduflow.com</p>
                       <p className="text-sm text-muted-foreground">For enrollment inquiries</p>
                     </div>
                   </div>

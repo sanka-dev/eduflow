@@ -49,8 +49,8 @@ function EnrollButton({
         <div className="space-y-2 text-gray-700">
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 text-blue-500" />
-            <a href="mailto:enrollment@yourschool.com" className="hover:text-blue-600 transition-colors">
-              enrollment@yourschool.com
+            <a href="mailto:enrollment@eduflow.com" className="hover:text-blue-600 transition-colors">
+              enrollment@eduflow.com
             </a>
           </div>
           <div className="flex items-center gap-2">

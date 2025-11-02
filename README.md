@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EduFlow - Modern Learning Management System
+
+EduFlow is a modern, feature-rich Learning Management System built with Next.js, Sanity CMS, and Clerk authentication.
 
 ## Getting Started
 

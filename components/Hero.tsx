@@ -10,19 +10,28 @@ export default function Hero() {
       {/* Galaxy Background Animation */}
       <div className="absolute inset-0">
         <Galaxy 
-          mouseRepulsion={true}
+          focal={[0.5, 0.5]}
+          rotation={[1.0, 0.0]}
+          starSpeed={0.01}
+          density={2.2}
+          hueShift={0}
+          disableAnimation={false}
+          speed={1.0}
           mouseInteraction={true}
-          density={1.5}
-          glowIntensity={0.5}
-          saturation={0.8}
-          hueShift={240}
+          glowIntensity={0.3}
+          saturation={0.0}
+          mouseRepulsion={true}
+          repulsionStrength={2}
+          twinkleIntensity={0.5}
+          rotationSpeed={0.1}
+          autoCenterRepulsion={0}
           transparent={true}
         />
       </div>
       
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/55 dark:from-white/15 dark:to-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/55  dark:to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/" />
 
       <div className="relative container mx-auto px-4 h-full flex flex-col justify-end pb-12">
         <div className="max-w-3xl">

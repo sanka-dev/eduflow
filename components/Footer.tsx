@@ -9,6 +9,9 @@ export default function Footer() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} EduFlow. All rights reserved.
           </p>
+          <p className="text-sm text-muted-foreground">
+            Crafted with care by <a href="https://ceynk.link/sanka" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition-colors">Sanka</a>
+          </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <Link href="#" className="hover:text-foreground transition-colors">
               Privacy Policy

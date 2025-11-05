@@ -23,12 +23,32 @@ export async function createManualEnrollment({
   verifiedBy = "System",
 }: CreateManualEnrollmentParams) {
   // For manual enrollment, we need to get student by clerkId first
-  // If student doesn't exist, this should be handled by the admin interface
   const { getStudentByClerkId } = await import("./getStudentByClerkId");
-  const studentResult = await getStudentByClerkId(clerkId);
+  let studentResult = await getStudentByClerkId(clerkId);
   
+  // If student doesn't exist, create them first
   if (!studentResult?.data?._id) {
-    throw new Error("Student not found. Please ensure the user has signed in at least once or create the student record manually.");
+    console.log("Student not found, creating new student record for clerkId:", clerkId);
+    
+    // Get user info from Clerk to create student
+    const { clerkClient } = await import("@clerk/nextjs/server");
+    const client = await clerkClient();
+    const user = await client.users.getUser(clerkId);
+    
+    const newStudent = await createStudentIfNotExists({
+      clerkId: clerkId,
+      email: user.emailAddresses[0]?.emailAddress || "",
+      firstName: user.firstName || "",
+      lastName: user.lastName || "",
+      imageUrl: user.imageUrl || "",
+    });
+    
+    // Get the student again to ensure we have the correct format
+    studentResult = await getStudentByClerkId(clerkId);
+    
+    if (!studentResult?.data?._id) {
+      throw new Error("Failed to create student record");
+    }
   }
 
   // Create enrollment with enhanced payment tracking

@@ -162,9 +162,46 @@ In Vercel Dashboard:
 2. Click "..." on any deployment
 3. Click "Redeploy"
 
+## PayHere Payment Integration
+
+### Sandbox Testing (Default)
+
+The application is configured to use PayHere sandbox for testing:
+- **Merchant ID:** 1228024 (PayHere sandbox)
+- **Test Cards:** Use PayHere provided test card numbers
+- No real charges are made in sandbox mode
+
+### Production Setup
+
+1. Sign up at [PayHere](https://www.payhere.lk/)
+2. Get your production merchant ID and secret
+3. Update environment variables:
+   ```
+   NEXT_PUBLIC_PAYHERE_MERCHANT_ID=your_production_merchant_id
+   PAYHERE_MERCHANT_SECRET=your_merchant_secret
+   ```
+4. In `components/PaymentForm.tsx`, change `sandbox: true` to `sandbox: false`
+
+### Payment Flow
+
+1. User clicks "Enroll Now" on a paid course
+2. Redirected to payment page with course details
+3. Fills payment information
+4. PayHere payment gateway opens
+5. After successful payment, user is enrolled automatically
+6. Redirected to success page with access to course
+
+### Important Notes
+
+- Free courses (price = 0 or null) auto-enroll without payment
+- Paid courses require PayHere payment completion
+- Payment notifications are logged in `/api/payment/notify`
+- Order IDs are automatically generated and tracked
+
 ## Support
 
 - Vercel Docs: https://vercel.com/docs
 - Next.js Docs: https://nextjs.org/docs
 - Sanity Docs: https://www.sanity.io/docs
 - Clerk Docs: https://clerk.com/docs
+- PayHere Docs: https://support.payhere.lk/

@@ -30,8 +30,8 @@ export default function Hero() {
       </div>
       
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/55  dark:to-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/5  dark:to-black/4" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-background/" />
 
       <div className="relative container mx-auto px-4 h-full flex flex-col justify-end pb-12">
         <div className="max-w-3xl">

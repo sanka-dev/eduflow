@@ -33,7 +33,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-20">
       {/* Hero Section */}
       <div className="relative h-[60vh] w-full">
         {course.image && (

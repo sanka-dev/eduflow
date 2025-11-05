@@ -1,6 +1,26 @@
+'use client';
+
+import dynamic from 'next/dynamic';
+
+const Galaxy = dynamic(() => import('./Galaxy'), { ssr: false });
+
 export default function Hero() {
   return (
-    <div className="relative h-[45vh] w-full">
+    <div className="relative h-screen w-full overflow-hidden">
+      {/* Galaxy Background Animation */}
+      <div className="absolute inset-0">
+        <Galaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1.5}
+          glowIntensity={0.5}
+          saturation={0.8}
+          hueShift={240}
+          transparent={true}
+        />
+      </div>
+      
+      {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/55 dark:from-white/15 dark:to-black/40" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
 

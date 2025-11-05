@@ -9,17 +9,17 @@ import DarkModeToggle from "./DarkModeToggle";
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/30 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/5">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between gap-4">
+        <div className="flex h-20 items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <Link
               href="/"
               prefetch={false}
               className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
             >
-              <BookOpen className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
+              <BookOpen className="h-7 w-7 text-primary" />
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
                 EduFlow
               </span>
             </Link>

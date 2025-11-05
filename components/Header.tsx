@@ -19,8 +19,8 @@ export default function Header() {
               className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
             >
               <BookOpen className="h-7 w-7 text-primary" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
-                EduFlow
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent" style={{ fontFamily: "'Anton SC', sans-serif" }}>
+                Edu Flow
               </span>
             </Link>
 

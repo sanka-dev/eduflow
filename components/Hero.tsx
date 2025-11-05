@@ -36,7 +36,7 @@ export default function Hero() {
       <div className="relative container mx-auto px-4 h-full flex flex-col justify-end pb-12">
         <div className="max-w-3xl">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent" style={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-            Expand Your Knowledge with Our <span className="italic">Courses</span>
+            Expand Your Knowledge with Our <span style={{ fontFamily: "'Charm', cursive" }}>Courses</span>
           </h1>
           <p className="text-xl text-muted-foreground">
             Discover a world of learning with our expertly crafted courses.
